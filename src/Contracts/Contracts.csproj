@@ -1,13 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <Platforms>AnyCPU;x64</Platforms>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Metadata\Entities.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Metadata\Entities.csproj" />
+    </ItemGroup>
 
 </Project>

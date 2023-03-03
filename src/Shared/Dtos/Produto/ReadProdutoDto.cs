@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Shared.Dtos;
+namespace Shared.Dtos.Produto;
 
-public record ProdutoDto
+public record ReadProdutoDto
 {
     [JsonPropertyName("id")]
-    public int Id { get; set; }
+    public int IdLista { get; set; }
     [JsonPropertyName("nome")]
     public string Nome { get; set; }
     [JsonPropertyName("preco")]

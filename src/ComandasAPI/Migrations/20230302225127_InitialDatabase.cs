@@ -17,9 +17,9 @@ namespace RestAPIFurb.Migrations
                 name: "comandas",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
+                    id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    idUsuario = table.Column<long>(type: "bigint", nullable: false),
+                    idUsuario = table.Column<int>(type: "int", nullable: false),
                     nomeUsuario = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     telefoneUsuario = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     ativo = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
@@ -34,12 +34,12 @@ namespace RestAPIFurb.Migrations
                 name: "produtos",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
+                    id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    idLista = table.Column<long>(type: "bigint", nullable: false),
+                    idLista = table.Column<int>(type: "int", nullable: false),
                     nome = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    preco = table.Column<long>(type: "bigint", nullable: false),
-                    comandaId = table.Column<long>(type: "bigint", nullable: false)
+                    preco = table.Column<int>(type: "int", nullable: false),
+                    comandaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,8 +57,8 @@ namespace RestAPIFurb.Migrations
                 columns: new[] { "id", "idUsuario", "nomeUsuario", "telefoneUsuario" },
                 values: new object[,]
                 {
-                    { 1L, 1L, "joao", "478888888" },
-                    { 2L, 2L, "Pedro", "47999999" }
+                    { 1, 1, "joao", "478888888" },
+                    { 2, 2, "Pedro", "47999999" }
                 });
 
             migrationBuilder.CreateIndex(

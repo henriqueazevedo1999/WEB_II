@@ -43,4 +43,9 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         RepositoryContext.Set<T>().Update(entity);
     }
+
+    public void UpdateRange(IEnumerable<T> entities)
+    {
+        RepositoryContext.Set<T>().UpdateRange(entities);
+    }
 }

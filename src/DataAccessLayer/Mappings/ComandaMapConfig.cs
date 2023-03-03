@@ -20,6 +20,6 @@ internal class ComandaMapConfig : IEntityTypeConfiguration<Comanda>
 
         builder.HasIndex(x => x.IdUsuario);
         builder.HasMany(c => c.Produtos).WithOne().IsRequired();
-        builder.Navigation(c => c.Produtos).UsePropertyAccessMode(PropertyAccessMode.Property);
+        builder.Navigation(c => c.Produtos).UsePropertyAccessMode(PropertyAccessMode.Property).AutoInclude();
     }
 }

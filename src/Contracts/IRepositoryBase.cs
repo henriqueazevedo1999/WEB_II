@@ -8,5 +8,6 @@ public interface IRepositoryBase<T>
     IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
     void Create(T entity);
     void Update(T entity);
+    void UpdateRange(IEnumerable<T> entities);
     void Delete(T entity);
 }

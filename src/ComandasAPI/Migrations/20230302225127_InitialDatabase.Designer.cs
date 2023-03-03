@@ -12,7 +12,7 @@ using Repository;
 namespace RestAPIFurb.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230302044740_InitialDatabase")]
+    [Migration("20230302225127_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -27,12 +27,12 @@ namespace RestAPIFurb.Migrations
 
             modelBuilder.Entity("Entities.Models.Comanda", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Ativo")
                         .ValueGeneratedOnAdd()
@@ -40,8 +40,8 @@ namespace RestAPIFurb.Migrations
                         .HasDefaultValue(true)
                         .HasColumnName("ativo");
 
-                    b.Property<long>("IdUsuario")
-                        .HasColumnType("bigint")
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int")
                         .HasColumnName("idUsuario");
 
                     b.Property<string>("NomeUsuario")
@@ -71,18 +71,18 @@ namespace RestAPIFurb.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
+                            Id = 1,
                             Ativo = false,
-                            IdUsuario = 1L,
+                            IdUsuario = 1,
                             NomeUsuario = "joao",
                             TelefoneUsuario = "478888888",
                             TimeCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 2L,
+                            Id = 2,
                             Ativo = false,
-                            IdUsuario = 2L,
+                            IdUsuario = 2,
                             NomeUsuario = "Pedro",
                             TelefoneUsuario = "47999999",
                             TimeCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -91,19 +91,19 @@ namespace RestAPIFurb.Migrations
 
             modelBuilder.Entity("Entities.Models.Produto", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasColumnName("id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("ComandaId")
-                        .HasColumnType("bigint")
+                    b.Property<int>("ComandaId")
+                        .HasColumnType("int")
                         .HasColumnName("comandaId");
 
-                    b.Property<long>("IdLista")
-                        .HasColumnType("bigint")
+                    b.Property<int>("IdLista")
+                        .HasColumnType("int")
                         .HasColumnName("idLista");
 
                     b.Property<string>("Nome")
@@ -112,8 +112,8 @@ namespace RestAPIFurb.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasColumnName("nome");
 
-                    b.Property<long>("Preco")
-                        .HasColumnType("bigint")
+                    b.Property<int>("Preco")
+                        .HasColumnType("int")
                         .HasColumnName("preco");
 
                     b.HasKey("Id");

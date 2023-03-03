@@ -8,7 +8,7 @@ internal class ComandasInitialData : IEntityTypeConfiguration<Comanda>
 {
     public void Configure(EntityTypeBuilder<Comanda> builder)
     {
-        uint id = 1;
+        int id = 1;
 
         builder.HasData
         (

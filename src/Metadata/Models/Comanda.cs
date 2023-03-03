@@ -1,13 +1,18 @@
-﻿namespace Entities.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Entities.Models;
 
 public class Comanda
 {
-    public uint Id { get; set; }
+    public int Id { get; set; }
     //fazer por login?
-    public uint IdUsuario { get; set; }
+    public int IdUsuario { get; set; }
+
     public string NomeUsuario { get; set; }
+
     public string TelefoneUsuario { get; set; }
+    
     public bool Ativo { get; set; }
     public DateTime TimeCreated { get; set; }
-    public ICollection<Produto> Produtos { get; set; }
+    public virtual ICollection<Produto> Produtos { get; set; }
 }

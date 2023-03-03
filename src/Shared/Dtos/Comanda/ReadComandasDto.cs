@@ -1,17 +1,15 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Shared.Dtos;
+namespace Shared.Dtos.Comanda;
 
-public record ReadComandaDto
+public record ReadComandasDto
 {
     [JsonPropertyName("id")]
-    public uint Id { get; set; }
+    public int Id { get; set; }
     [JsonPropertyName("idUsuario")]
-    public uint IdUsuario { get; set; }
+    public int IdUsuario { get; set; }
     [JsonPropertyName("nomeUsuario")]
     public string NomeUsuario { get; set; }
     [JsonPropertyName("telefoneUsuario")]
     public string TelefoneUsuario { get; set; }
-    [JsonPropertyName("produtos")]
-    public ProdutoDto[] Produtos { get; set; }
 }

@@ -33,9 +33,7 @@ internal sealed class ComandaService : IComandaService
 
     public void DeleteComanda(int id, bool trackChanges)
     {
-        var comanda = _repository.Comanda.GetComanda(id, trackChanges);
-        if (comanda is null)
-            throw new ComandaNotFoundException(id);
+        var comanda = GetComandaAndCheckIfItExists(id, trackChanges);
 
         _repository.Comanda.DeleteComanda(comanda);
         _repository.Save();
@@ -59,10 +57,7 @@ internal sealed class ComandaService : IComandaService
 
     public ReadComandaDto GetComanda(int id, bool trackChanges)
     {
-        var comanda = _repository.Comanda.GetComanda(id, trackChanges);
-
-        if (comanda is null)
-            throw new ComandaNotFoundException(id);
+        var comanda = GetComandaAndCheckIfItExists(id, trackChanges);
 
         var comandaDto = _mapper.Map<ReadComandaDto>(comanda);
         
@@ -73,9 +68,7 @@ internal sealed class ComandaService : IComandaService
     {
         try
         {
-            var comanda = _repository.Comanda.GetComanda(id, trackChanges: true);
-            if (comanda is null)
-                throw new ComandaNotFoundException(id);
+        var comanda = GetComandaAndCheckIfItExists(id, trackChanges: true);
 
             _mapper.Map(updateComandaDto, comanda);
 
@@ -108,5 +101,13 @@ internal sealed class ComandaService : IComandaService
             _logger.LogError($"Exception in the {nameof(UpdateComanda)} service method: {ex}");
             throw;
         }
+    }
+
+    private Comanda GetComandaAndCheckIfItExists(int id, bool trackChanges)
+    {
+        var comanda = _repository.Comanda.GetComanda(id, trackChanges);
+        if (comanda is null)
+            throw new ComandaNotFoundException(id);
+        return comanda;
     }
 }

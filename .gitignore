@@ -476,3 +476,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 /src/ComandasAPI/internal_logs/internallog.txt
+/src/RestAPIFurb/internal_logs
+/Deploy

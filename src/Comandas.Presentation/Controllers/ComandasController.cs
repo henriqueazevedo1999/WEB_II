@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.Dtos.Comanda;
@@ -6,8 +7,9 @@ using System.Text.Json;
 
 namespace Comandas.Presentation.Controllers;
 
-[Route("RestAPIFurb/[controller]")]
 [ApiController]
+[Authorize]
+[Route("RestAPIFurb/[controller]")]
 public class ComandasController : ControllerBase
 {
     private readonly IServiceManager _service;
@@ -17,6 +19,9 @@ public class ComandasController : ControllerBase
         _service = service;
     }
 
+    /// <summary>
+    /// Retorna todas as comandas cadastradas
+    /// </summary>
     [HttpGet]
     [ProducesResponseType(typeof(ReadComandasDto[]), StatusCodes.Status200OK)]
     public IActionResult GetComandas()
@@ -25,6 +30,9 @@ public class ComandasController : ControllerBase
         return Ok(comandas);
     }
 
+    /// <summary>
+    /// Retorna determinada comanda de acordo com o id informado
+    /// </summary>
     [HttpGet("{id:int}", Name = nameof(GetComanda))]
     [ProducesResponseType(typeof(ReadComandaDto), StatusCodes.Status200OK)]
     public IActionResult GetComanda(int id)
@@ -33,8 +41,11 @@ public class ComandasController : ControllerBase
         return Ok(comanda);
     }
 
+    /// <summary>
+    /// Cria uma nova comanda
+    /// </summary>
     [HttpPost]
-    [ValidateModelState]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
     [ProducesResponseType(typeof(ReadComandaDto), StatusCodes.Status201Created)]
     public IActionResult CreateComanda([FromBody] CreateComandaDto comanda)
     {
@@ -43,8 +54,12 @@ public class ComandasController : ControllerBase
     }
 
     //o certo para o especificado no enunciado seria usar patch
+    /// <summary>
+    /// Atualiza uma determinada comanda
+    /// </summary>
     [HttpPut("{id:int}")]
-    [ValidateModelState]
+    [Authorize(Roles = "Gerente,Administrador")]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
     [ProducesResponseType(typeof(ReadComandaDto), StatusCodes.Status200OK)]
     public IActionResult UpdateComanda(int id, [FromBody] UpdateComandaDto comanda)
     {
@@ -53,7 +68,11 @@ public class ComandasController : ControllerBase
         return Ok(updatedComanda);
     }
 
+    /// <summary>
+    /// Remove uma determinada comanda
+    /// </summary>
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult DeleteComanda(int id)
     {

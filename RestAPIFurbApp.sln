@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestAPIFurb", "src\ComandasAPI\RestAPIFurb.csproj", "{A88064D3-4780-460D-A52D-93D88AD818DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestAPIFurb", "src\RestAPIFurb\RestAPIFurb.csproj", "{A88064D3-4780-460D-A52D-93D88AD818DB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "src\DataAccessLayer\Repository.csproj", "{713DC6B8-CD6E-4EAB-959E-C7E393D0076A}"
 EndProject

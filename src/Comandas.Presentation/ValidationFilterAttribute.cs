@@ -1,31 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Dynamic;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Comandas.Presentation;
 
-public class ValidateModelStateAttribute : ActionFilterAttribute
+public class ValidationFilterAttribute : IActionFilter
 {
-    public override void OnActionExecuting(ActionExecutingContext context)
+    public void OnActionExecuted(ActionExecutedContext context) { }
+
+    public void OnActionExecuting(ActionExecutingContext context)
     {
-        if (context.ModelState.ErrorCount == 0)
+        var param = context.ActionArguments.SingleOrDefault(x => x.Value.ToString().Contains("Dto")).Value;
+        if (param == null)
         {
-            base.OnActionExecuting(context);
+            var action = context.RouteData.Values["action"];
+            var controller = context.RouteData.Values["controller"];
+
+            context.Result = new BadRequestObjectResult($"Object is null. Controller: {controller}, action: {action}");
             return;
         }
 
-        var bodyParameters = context.ActionDescriptor.Parameters.Where(p => p.BindingInfo.BindingSource.Id.Equals("Body", StringComparison.InvariantCultureIgnoreCase));
-        if (!context.ActionArguments.Any() && bodyParameters.Any())
-        {
-            context.Result = new BadRequestObjectResult($"A body parameter was null");
-            base.OnActionExecuting(context);
+        if (context.ModelState.IsValid)
             return;
-        }
-        
-        var rootModelType = bodyParameters.FirstOrDefault()?.ParameterType; //Get model type
+
+        var rootModelType = param.GetType(); //Get model type
 
         var expandoObj = new ExpandoObject();
         var expandoObjCollection = (ICollection<KeyValuePair<string, object>>)expandoObj; //Cannot convert IEnumrable to ExpandoObject
@@ -76,7 +77,5 @@ public class ValidateModelStateAttribute : ActionFilterAttribute
 
         dynamic eoDynamic = expandoObj;
         context.Result = new UnprocessableEntityObjectResult(eoDynamic);
-
-        base.OnActionExecuting(context);
     }
 }

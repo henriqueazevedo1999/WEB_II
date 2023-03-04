@@ -8,7 +8,7 @@ internal class ComandaMapConfig : IEntityTypeConfiguration<Comanda>
 {
     public void Configure(EntityTypeBuilder<Comanda> builder)
     {
-        builder.ToTable("comandas");
+        builder.ToTable("Comandas");
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id).ValueGeneratedOnAdd();

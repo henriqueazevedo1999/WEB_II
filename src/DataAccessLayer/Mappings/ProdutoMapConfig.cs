@@ -8,7 +8,7 @@ internal class ProdutoMapConfig : IEntityTypeConfiguration<Produto>
 {
     public void Configure(EntityTypeBuilder<Produto> builder)
     {
-        builder.ToTable("produtos");
+        builder.ToTable("Produtos");
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id).ValueGeneratedOnAdd();

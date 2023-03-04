@@ -3,6 +3,7 @@ using Entities.Models;
 using Shared.Dtos.Comanda;
 using Shared.Dtos.Produto;
 using RestAPIFurb.Extensions;
+using Shared.Dtos.User;
 
 namespace RestAPIFurb;
 
@@ -39,5 +40,7 @@ public class MappingProfile : Profile
         CreateMap<Produto, ReadProdutoDto>();
         CreateMap<CreateProdutoDto, Produto>();
         CreateMap<UpdateProdutoDto, Produto>().IgnoreNullsOnSource();
+
+        CreateMap<CreateUserDto, User>();
     }
 }
